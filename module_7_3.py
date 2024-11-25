@@ -4,17 +4,15 @@ class WordsFinder:
 
     def get_all_words(self):
         all_words = {}
-        file = 'test_file.txt'
         char_ = [',', '.', '=', '!', '?', ';', ':', ' - ']
-        list_ = []
 
-        with open(file, encoding='utf-8') as self.file_names:
-            for line in self.file_names:
+        for filename in self.file_names:
+            with open(filename, encoding='utf-8') as file:
+                data = file.read()
+                data = data.lower()
                 for ch in char_:
-                    line = line.replace(ch, '')
-                text = line.lower().split()
-                list_.extend(text)
-                all_words[file] = list_
+                    data = data.replace(ch, ' ')
+                all_words[filename] = data.split()
         return all_words
 
     def find(self, word):
